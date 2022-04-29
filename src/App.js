@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
 
+import Login from "./Login";
+import Home from "./components/tabs/Home";
 function App() {
+  const [isLoggedin, setIsLoggedin] = useState(false);
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      setIsLoggedin(true);
+    }
+    
+  }, []);
+
+  function LoginHandler(userData) {
+    fetch("https://good-reads-server.herokuapp.com/admin/login", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        sessionStorage.setItem("token", data.token);
+        setIsLoggedin(true);
+      });
+  }
+  if (isLoggedin) {
+    return <Home />;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Login onLogin={LoginHandler} />
     </div>
   );
 }
