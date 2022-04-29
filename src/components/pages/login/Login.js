@@ -1,6 +1,6 @@
 import {useRef} from 'react';
 import classes from "./Login.module.css";
-import Card from "./components/ui/Card";
+import Card from "../../ui/Card";
 function Login(props) {
     const usernameInputRef = useRef();
     const passwordInputRef = useRef();

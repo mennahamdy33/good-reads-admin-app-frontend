@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-import Login from "./Login";
-import Home from "./components/tabs/Home";
+import Login from "./components/pages/login/Login";
+import Home from "./components/pages/tabs/Home";
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       setIsLoggedin(true);
     }
-    
+
   }, []);
 
   function LoginHandler(userData) {
