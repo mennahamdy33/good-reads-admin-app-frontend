@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import "@material-tailwind/react/tailwind.css";
 import Login from "./components/pages/login/Login";
 import Home from "./components/pages/tabs/Home";
 function App() {
@@ -28,7 +28,10 @@ function App() {
       });
   }
   if (isLoggedin) {
-    return <Home />;
+    return (
+      <Home />
+    )
+    ;
   }
   return (
     <div>
