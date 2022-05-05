@@ -189,8 +189,8 @@ function Books() {
               <td>{val.CategoryId}</td>
               <td>{val.AuthorId}</td>
               <td><BookList>
-                onDelete={(item) => {
-                  console.log(item);
+                onDelete={(val) => {
+                  console.log(val);
                   console.log("deleted");
                     }}
                 onEdit={(item) => {

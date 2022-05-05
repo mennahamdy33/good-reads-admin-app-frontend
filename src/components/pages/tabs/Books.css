@@ -3,7 +3,7 @@ button{
     padding: 5px;
     margin: 5px;
 }
-input{
+.ipTxt{
     background-color: yellow;
     border-color: black;
     border: 2px;
