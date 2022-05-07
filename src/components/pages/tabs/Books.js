@@ -1,25 +1,25 @@
 import React, { useState, useEffect} from "react";
-import MyNavbar from "../../layout/navbar/navbar";
-import Author from "./Author";
-import Category from "./Category";
+// import MyNavbar from "../../layout/navbar/navbar";
+// import Author from "./Author";
+// import Category from "./Category";
 import "./Books.css";
-
+import Home from './Home';
 function Books() {
     const [loadedbooks,setLoadedbooks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [activePage, setActivePage]=useState(0);
+    // const [activePage, setActivePage]=useState(0);
     // -------------------------------------------------------------
-    const [items, setItems] = useState([]);
-    // -------------------------------------------------------------
-    function BookHandler(){
-        setActivePage(1);
-    }
-    function AuthorHandler(){
-        setActivePage(2);
-    }
-    function CategoryHandler(){
-        setActivePage(3);
-    }
+    // const [items, setItems] = useState([]);
+    // // -------------------------------------------------------------
+    // function BookHandler(){
+    //     setActivePage(1);
+    // }
+    // function AuthorHandler(){
+    //     setActivePage(2);
+    // }
+    // function CategoryHandler(){
+    //     setActivePage(3);
+    // }
   
     useEffect(()=>{fetch(
         "https://good-reads-server.herokuapp.com/admin/books"
@@ -35,17 +35,18 @@ function Books() {
       if(isLoading){
         return <section>Loading...</section>
     }
-    if(activePage===1){
-        return <Books/>
-    } else if(activePage===2){
-      return <Author/>
-    }else if(activePage===3){
-        return <Category/>
-      }
+    // if(activePage===1){
+    //     return <Books/>
+    // } else if(activePage===2){
+    //   return <Author/>
+    // }else if(activePage===3){
+    //     return <Category/>
+    //   }
     // ---------------------------------------------------------------------------------
     function BookInput({ onSubmit, label = "Add Book", inputValue }) {
       let [value, setValue] = useState(inputValue);
       return (
+        
         <div className="ipField">
           <input
             className="ipTxt"
@@ -69,7 +70,7 @@ function Books() {
     }
 
     function BookList({items,onDelete,onEdit,header,onUpdate}) {
-      const [inEdit, setInEdit] = useState(null);
+      // const [inEdit, setInEdit] = useState(null);
       return (
         <>
           {header}
@@ -145,8 +146,11 @@ function Books() {
     // }
     // ---------------------------------------------------------------------------------
     return (
-    <div>
-      <MyNavbar onClickBook={BookHandler} onClickCategory={CategoryHandler} onClickAuthor={AuthorHandler} active="Books"/>
+    <Home active="Books">
+
+   <div>
+      {/* <MyNavbar onClickBook={BookHandler} onClickCategory={CategoryHandler} onClickAuthor={AuthorHandler} active="Books"/> */}
+     
       <BookInput
         onSubmit={(value) => {
           console.log(value);
@@ -205,6 +209,8 @@ function Books() {
       </table>
     </div>
     </div>
+    </Home>
+
     );
   }
   export default Books;

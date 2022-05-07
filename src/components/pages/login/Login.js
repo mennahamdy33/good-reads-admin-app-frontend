@@ -21,7 +21,8 @@ function Login(props) {
       <div className={classes.main}>
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
+        <
+          div className={classes.control}>
           <label htmlFor="username">User Name</label>
           <input type="text" required id="username" ref={usernameInputRef} />
         </div>

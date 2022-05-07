@@ -4,7 +4,7 @@ import Author from "./Author";
 import Category from "./Category";
 import Books from "./Books";
 
-function Home() {
+function Home(props) {
   const [activePage, setActivePage]=useState(0);
     function BookHandler(){
         setActivePage(1);
@@ -25,8 +25,8 @@ function Home() {
     }
   return (
   <div>
-    <MyNavbar onClickBook={BookHandler} onClickCategory={CategoryHandler} onClickAuthor={AuthorHandler} />
-  <div>Home</div>
+    <MyNavbar onClickBook={BookHandler} onClickCategory={CategoryHandler} onClickAuthor={AuthorHandler} active={props.active} />
+    {props.children}
   </div>);
 }
 export default Home;
