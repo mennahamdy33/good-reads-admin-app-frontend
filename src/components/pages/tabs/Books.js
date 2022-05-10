@@ -2,6 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./Books.css";
 import Home from "./Home";
 import Category from "./Category";
+import { Modal, Dropdown, DropdownButton } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Form,
+  Button,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+} from "react-bootstrap";
+import "./Author.css";
 function Books() {
   const [loadedbooks, setLoadedbooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +35,7 @@ function DeleteHandler(val){
 }
 
   useEffect(() => {
-    fetch("http://localhost:5000/admins/books")
+    fetch("https://good-reads-server.herokuapp.com/admins/books")
       .then((response) => {
         // console.log("outer then 1");
         return response.json();
@@ -52,10 +62,13 @@ function DeleteHandler(val){
 
   function BookInput({ onSubmit, label = "Add Book", inputValue }) {
     let [value, setValue] = useState(inputValue);
+    const [showModal, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
     return (
       <div className="ipField">
-        <input
+        {/* <input
           className="ipTxt"
           type="text"
           value={value}
@@ -71,7 +84,70 @@ function DeleteHandler(val){
           }}
         >
           {label}
-        </button>
+        </button> */}
+
+        <Button variant="primary" onClick={handleShow} className="openBtn">
+          Add Book
+        </Button>
+        <Modal show={showModal} onHide={handleClose} className="myModal">
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Book Name: </Form.Label>
+              <Form.Control
+                type="textarea"
+                placeholder="Harry Potter"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <div>
+              <Dropdown>
+                <Dropdown.Toggle >Category</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#">Horror</Dropdown.Item>
+                  <Dropdown.Item href="#">Science Fiction</Dropdown.Item>
+                  <Dropdown.Item href="#">Romance</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              </div>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <div>
+              <Dropdown>
+                <Dropdown.Toggle >Author</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#">Menna Hamdy</Dropdown.Item>
+                  <Dropdown.Item href="#">Eman Hesham</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              </div>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Image: </Form.Label>
+              <div className="input-group">
+        <div className="custom-file">
+          <input
+            type="file"
+            className="custom-file-input"
+            id="inputGroupFile01"
+            aria-describedby="inputGroupFileAddon01"
+          />
+        </div>
+      </div>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <br></br>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </div>
     );
   }

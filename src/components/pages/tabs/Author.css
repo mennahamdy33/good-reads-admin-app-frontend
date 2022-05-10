@@ -1,7 +1,21 @@
 .myModal{
-    background-color: aqua;
+    /* background-color: aqua; */
     padding: 5px;
-    margin-bottom: 30%;
-    margin-left: 35%;
+    /* margin-bottom: 30%; */
+    margin-left: 40%;
     width: fit-content;
+    height: fit-content;
+}
+.openBtn{
+    background-color: maroon;
+    color: white;
+    border-radius: 1px;
+    border-color: black;
+    border-width: 1px;
+    margin: 2px;
+    width: 100px;
+}
+.openBtn:hover{
+    height: 40px;
+    width: 110px;
 }
