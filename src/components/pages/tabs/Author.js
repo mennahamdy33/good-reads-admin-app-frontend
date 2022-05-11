@@ -9,7 +9,7 @@ import {
   ControlLabel,
 } from "react-bootstrap";
 import Home from "./Home";
-import "./Author.css";
+import "./Modal.css";
 // import React, { useState} from "react";
 // import MyNavbar from "../../layout/navbar/navbar";
 // import Books from "./Books";
