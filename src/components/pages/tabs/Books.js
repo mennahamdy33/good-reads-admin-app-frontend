@@ -9,6 +9,7 @@ import {
 
 } from "react-bootstrap";
 import "./Modal.css";
+import ModalComponent from '../../modal/modal'
 function Books() {
 
   const [loadedbooks, setLoadedbooks] = useState([]);
@@ -72,271 +73,13 @@ function Books() {
     );
   }
 
-  function BookInput({ label = "Add Book" }) {
-    const [showModal, setShow] = useState(false);
+ 
 
-    const bookNameInputRef = useRef();
-    const categoryInputRef = useRef();
-    const authorInputRef = useRef();
-
-    function submitHandler(event) {
-      event.preventDefault();
-      const name = bookNameInputRef.current.value;
-      const CategoryId = categoryInputRef.current.value;
-      const AuthorId = authorInputRef.current.value;
-      bookNameInputRef.current.value = "";
-      categoryInputRef.current.value = "";
-      const bookData = {
-        name,
-        CategoryId,
-        AuthorId,
-      };
-
-      fetch("https://good-reads-server.herokuapp.com/admin/books", {
-        method: "POST",
-        body: JSON.stringify(bookData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
-      setIsChanged(true);
-
-      setShow(false);
-    }
-
-    const handleClose = () => setShow(false);
-    const handleShow = async () => {
-      setShow(true);
-    };
-
-    return (
-      <div className="ipField">
-        <Button variant="primary" onClick={handleShow} className="openBtn">
-          Add Book
-        </Button>
-        <Modal show={showModal} onHide={handleClose} className="myModal">
-          <Modal.Body>
-            <Form>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Book Name: </Form.Label>
-                <Form.Control
-                  type="textarea"
-                  placeholder="ex: Harry Potter"
-                  autoFocus
-                  ref={bookNameInputRef}
-                  requried
-                />
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Select
-                  ref={categoryInputRef}
-                  aria-label="Default select example"
-                >
-                  <option>Category</option>
-                  {loadedCategories.map((val) => {
-                    return <option value={val._id}>{val.name} </option>;
-                  })}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Select
-                  ref={authorInputRef}
-                  aria-label="Default select example"
-                >
-                  <option>Author</option>
-
-                  {loadedAuthors.map((val) => {
-                    return (
-                      <option value={val._id}>
-                        {val.firstName} {val.lastName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Image: </Form.Label>
-                <div className="input-group">
-                  <div className="custom-file">
-                    <input
-                      type="file"
-                      className="custom-file-input"
-                      id="inputGroupFile01"
-                      aria-describedby="inputGroupFileAddon01"
-                    />
-                  </div>
-                </div>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <br></br>
-            <Button variant="primary" onClick={submitHandler}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-
-  function EditButton(props) {
-    const [showModalEdit, setShowEdit] = useState(false);
-
-    const bookNameInputRef = useRef();
-    const categoryInputRef = useRef();
-    const authorInputRef = useRef();
-    function submitHandler(event) {
-      event.preventDefault();
-      const name = bookNameInputRef.current.value;
-      const CategoryId = categoryInputRef.current.value;
-      const AuthorId = authorInputRef.current.value;
-      bookNameInputRef.current.value = "";
-      categoryInputRef.current.value = "";
-      const bookData = {
-        name,
-        CategoryId,
-        AuthorId,
-      };
-
-      fetch(
-        `https://good-reads-server.herokuapp.com/admin/books/${props.book._id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(bookData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
-      setIsChanged(true);
-
-      setShowEdit(false);
-    }
-
-    const handleClose = () => setShowEdit(false);
-    const handleShow = () => {
-      setShowEdit(true);
-    };
-
-    return (
-      <div className="ipField">
-        <Button variant="primary" onClick={handleShow} className="openBtn">
-          edit Book
-        </Button>
-        <Modal show={showModalEdit} onHide={handleClose} className="myModal">
-          <Modal.Body>
-            <Form>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Book Name: </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="ex: Harry Potter"
-                  autoFocus
-                  ref={bookNameInputRef}
-                  defaultValue={props.book.name}
-                />
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Select
-                  ref={categoryInputRef}
-                  aria-label="Default select example"
-                  defaultValue={props.book.CategoryId}
-                >
-                  <option>Category</option>
-                  {loadedCategories.map((val) => {
-                    return <option value={val._id}>{val.name} </option>;
-                  })}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Select
-                  ref={authorInputRef}
-                  aria-label="Default select example"
-                  defaultValue={props.book.AuthorId}
-                >
-                  <option>Author</option>
-
-                  {loadedAuthors.map((val) => {
-                    return (
-                      <option value={val._id}>
-                        {val.firstName} {val.lastName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Image: </Form.Label>
-                <div className="input-group">
-                  <div className="custom-file">
-                    <input
-                      type="file"
-                      className="custom-file-input"
-                      id="inputGroupFile01"
-                      aria-describedby="inputGroupFileAddon01"
-                    />
-                  </div>
-                </div>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <br></br>
-            <Button variant="primary" onClick={submitHandler}>
-              Edit
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
+ 
   return (
     <Home active="Books">
       <div>
-        <BookInput />
+        <ModalComponent book  label='Add Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
 
         <div className="App">
           <table>
@@ -369,7 +112,7 @@ function Books() {
                     >
                       x
                     </button>
-                    <EditButton book={val} />
+                    <ModalComponent book={val} label='edit Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
                   </td>
                 </tr>
               );

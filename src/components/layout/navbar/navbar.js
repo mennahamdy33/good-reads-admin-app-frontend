@@ -7,9 +7,7 @@ import NavbarToggler from "@material-tailwind/react/NavbarToggler";
 import NavbarCollapse from "@material-tailwind/react/NavbarCollapse";
 import Nav from "@material-tailwind/react/Nav";
 import NavItem from "@material-tailwind/react/NavItem";
-// import Category from "../../pages/tabs/Category";
-// import NavLink from "@material-tailwind/react/NavLink";
-// import Icon from "@material-tailwind/react/Icon";
+
 
 export default function MyNavbar(props) {
     const [openMenu, setOpenMenu] = useState(false);
