@@ -103,7 +103,7 @@ function Books() {
                         DeleteHandler(val);
                       }}
                     >
-                      x
+                      Delete
                     </button>
                     <BookModal book={val} label='edit Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
                   </td>
