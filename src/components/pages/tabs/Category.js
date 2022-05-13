@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Books.css";
 import Home from "./Home";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BookModal from '../../modal/BookModal'
 import CategoryModal from "../../modal/CategoryModal";
 function Category() {
 

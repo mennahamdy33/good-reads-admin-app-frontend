@@ -72,7 +72,7 @@ function Books() {
   return (
     <Home active="Books">
       <div>
-        <BookModal book  label='Add Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+        <BookModal book  label='Add' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
 
         <div className="App">
           <table>
@@ -105,7 +105,7 @@ function Books() {
                     >
                       Delete
                     </button>
-                    <BookModal book={val} label='edit Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+                    <BookModal book={val} label='Edit' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
                   </td>
                 </tr>
               );

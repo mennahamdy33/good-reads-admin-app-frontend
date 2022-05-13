@@ -1,6 +1,6 @@
 
   import React, { useState, useRef } from "react";
-  import "./BookModal.css";
+  import "./AuthorModal.css";
   import { Modal } from "react-bootstrap";
   import "bootstrap/dist/css/bootstrap.min.css";
   import {
@@ -9,29 +9,29 @@
   
   } from "react-bootstrap";
 
-  function BookModal(props) {
+  function AuthorModal(props) {
     const [showModal, setShow] = useState(false);
 
-    const bookNameInputRef = useRef();
-    const categoryInputRef = useRef();
+    // const bookNameInputRef = useRef();
+    // const categoryInputRef = useRef();
     const authorInputRef = useRef();
 
     function submitHandler(event) {
       event.preventDefault();
-      const name = bookNameInputRef.current.value;
-      const CategoryId = categoryInputRef.current.value;
+      // const name = bookNameInputRef.current.value;
+      // const CategoryId = categoryInputRef.current.value;
       const AuthorId = authorInputRef.current.value;
-      bookNameInputRef.current.value = "";
-      categoryInputRef.current.value = "";
-      const bookData = {
-        name,
-        CategoryId,
+      // bookNameInputRef.current.value = "";
+      // categoryInputRef.current.value = "";
+      const authorData = {
+        // name,
+        // CategoryId,
         AuthorId,
       };
-      if(props.label === 'Add Book'){
-      fetch("https://good-reads-server.herokuapp.com/admin/books", {
+      if(props.label === 'Add'){
+      fetch("https://good-reads-server.herokuapp.com/admin/authors", {
         method: "POST",
-        body: JSON.stringify(bookData),
+        body: JSON.stringify(authorData),
         headers: {
           "Content-Type": "application/json",
         },
@@ -46,10 +46,10 @@
     else{
 
         fetch(
-            `https://good-reads-server.herokuapp.com/admin/books/${props.book._id}`,
+            `https://good-reads-server.herokuapp.com/admin/authors/${props.author._id}`,
             {
               method: "PATCH",
-              body: JSON.stringify(bookData),
+              body: JSON.stringify(authorData),
               headers: {
                 "Content-Type": "application/json",
               },
@@ -88,55 +88,48 @@
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Label>Book Name: </Form.Label>
+                <Form.Label>First Name: </Form.Label>
                 <Form.Control
                   type="textarea"
-                  placeholder="ex: Harry Potter"
+                  placeholder="ex: Joanne"
                   autoFocus
-                  ref={bookNameInputRef}
-                  defaultValue={ props.book.name }
+                  ref={authorInputRef}
+                  defaultValue={ props.author.firstName }
                 />
               </Form.Group>
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Select
-                  ref={categoryInputRef}
-                  aria-label="Default select example"
-                  defaultValue={ props.book.CategoryId}
-                >
-                  <option >Category</option>
-                  {props.loadedCategories.map((val) => {
-                    return <option value={val._id}>{val.name} </option>;
-                  })}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Select
+                <Form.Label>Last Name: </Form.Label>
+                <Form.Control
+                  type="textarea"
+                  placeholder="ex: Rowling"
+                  autoFocus
                   ref={authorInputRef}
-                  aria-label="Default select example"
-                  defaultValue={ props.book.AuthorId}
-                >
-                  <option>Author</option>
-
-                  {props.loadedAuthors.map((val) => {
-                    return (
-                      <option value={val._id}>
-                        {val.firstName} {val.lastName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
+                  defaultValue={ props.author.lastName }
+                />
               </Form.Group>
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Label>Image: </Form.Label>
+                <div>
+                <div className="row">
+                    <div className="col-md-4">
+                        <Form.Group controlId="dob">
+                            <Form.Label>Select Date</Form.Label>
+                            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
+                        </Form.Group>
+                    </div>
+                </div>
+            </div>
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Photo: </Form.Label>
                 <div className="input-group">
                   <div className="custom-file">
                     <input
@@ -163,4 +156,4 @@
       </div>
     );
   }
-  export default BookModal;
+  export default AuthorModal;
