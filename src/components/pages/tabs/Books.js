@@ -1,15 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Books.css";
 import Home from "./Home";
-import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Form,
-  Button,
-
-} from "react-bootstrap";
-import "./Modal.css";
-import ModalComponent from '../../modal/modal'
+import BookModal from '../../modal/BookModal'
 function Books() {
 
   const [loadedbooks, setLoadedbooks] = useState([]);
@@ -79,7 +72,7 @@ function Books() {
   return (
     <Home active="Books">
       <div>
-        <ModalComponent book  label='Add Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+        <BookModal book  label='Add Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
 
         <div className="App">
           <table>
@@ -112,7 +105,7 @@ function Books() {
                     >
                       x
                     </button>
-                    <ModalComponent book={val} label='edit Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+                    <BookModal book={val} label='edit Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
                   </td>
                 </tr>
               );
