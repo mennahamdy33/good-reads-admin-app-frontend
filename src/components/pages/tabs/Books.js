@@ -88,13 +88,13 @@ function Books() {
               return (
                 <tr key={key}>
                   <td>{key + 1}</td>
-                  <td>{val.photo}</td>
+                  <td>     <img className="activator" style={{ width: 50, height: 50 }} src={val.image} alt='cdcds' /></td>
                   <td>{val.name}</td>
 
-                  <td>{val.category[0].name}</td>
+                  <td>{val.category[0] && val.category[0].name}</td>
 
                   <td>
-                    {val.author[0].firstName} {val.author[0].lastName}
+                    {val.author[0] && val.author[0].firstName} {val.author[0] && val.author[0].lastName}
                   </td>
                   <td>
                     <button
