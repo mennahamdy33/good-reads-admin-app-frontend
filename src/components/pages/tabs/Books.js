@@ -72,7 +72,7 @@ function Books() {
   return (
     <Home active="Books">
       <div>
-        <BookModal book  label='Add Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+        <BookModal book  label='Add' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
 
         <div className="App">
           <table>
@@ -80,8 +80,8 @@ function Books() {
               <th>ID</th>
               <th>Photo</th>
               <th>Name</th>
-              <th>CategoryID</th>
-              <th>AuthorID</th>
+              <th>Category</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
             {loadedbooks.map((val, key) => {
@@ -103,9 +103,9 @@ function Books() {
                         DeleteHandler(val);
                       }}
                     >
-                      x
+                      Delete
                     </button>
-                    <BookModal book={val} label='edit Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+                    <BookModal book={val} label='Edit' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
                   </td>
                 </tr>
               );
