@@ -1,3 +1,5 @@
+/* @import url('https://fonts.google.com/specimen/Lobster'); */
+
 /* button{
     background-color: red;
     padding: 5px;
@@ -23,6 +25,7 @@
     height: auto;
     margin: 2px;
     padding: 2px;
+    /* font-family: 'Lobster'; */
   }
     
   th {
@@ -34,12 +37,14 @@
     text-align: center;
     background-color: #29adce;
     color: white;
+    /* font-family: 'Lobster'; */
   }
     
   td {
     text-align: center;
     border: 1px solid #ddd;
     padding: 8px;
+    /* font-family: Lobster; */
   }  
 
   .myModal{

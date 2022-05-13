@@ -72,7 +72,7 @@ function Books() {
   return (
     <Home active="Books">
       <div>
-        <BookModal book  label='Add Book' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
+        <BookModal book  label='Add' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
 
         <div className="App">
           <table>
