@@ -80,8 +80,8 @@ function Books() {
               <th>ID</th>
               <th>Photo</th>
               <th>Name</th>
-              <th>CategoryID</th>
-              <th>AuthorID</th>
+              <th>Category</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
             {loadedbooks.map((val, key) => {
