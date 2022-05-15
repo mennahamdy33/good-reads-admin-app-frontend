@@ -3,46 +3,14 @@ import "./Books.css";
 import Home from "./Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CategoryModal from "../../modal/CategoryModal";
+import { DeleteModal } from "../../modal/DeleteModal";
 function Category() {
-
   // const [loadedbooks, setLoadedbooks] = useState([]);
   const [loadedCategories, setLoadedCategories] = useState([]);
   // const [loadedAuthors, setLoadedAuthors] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
-  // function getAuthors() {
-  //   fetch("https://good-reads-server.herokuapp.com/admins/authors")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then(async (data) => {
-  //       setLoadedAuthors(data);
-  //     });
-  // }
-  function getCategories() {
-    fetch("https://good-reads-server.herokuapp.com/admins/categories")
-      .then((response) => {
-        return response.json();
-      })
-      .then(async (data) => {
-        setLoadedCategories(data);
-      });
-  }
-
-  function DeleteHandler(val) {
-    fetch(`https://good-reads-server.herokuapp.com/admins/categories/${val._id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        console.log(json);
-        setIsChanged(true);
-
-      });
-  }
 
   useEffect(() => {
     fetch("https://good-reads-server.herokuapp.com/admins/categories")
@@ -55,8 +23,6 @@ function Category() {
         setLoadedCategories(data);
       });
     setIsChanged(false);
-    getCategories();
-    // getAuthors();
   }, [isChanged]);
 
   if (isLoading) {
@@ -67,14 +33,16 @@ function Category() {
     );
   }
 
- 
-
- 
   return (
     <Home active="Category">
       <div>
         <div className="btnAddCategory">
-        <CategoryModal category  label='Add' change={setIsChanged} loadedCategories={loadedCategories} />
+          <CategoryModal
+            category
+            label="Add"
+            change={setIsChanged}
+            loadedCategories={loadedCategories}
+          />
         </div>
         <div className="App">
           <table>
@@ -89,15 +57,16 @@ function Category() {
                   <td>{key + 1}</td>
                   <td>{val.name}</td>
                   <td>
-                    <button
-                      className="xBtn"
-                      onClick={() => {
-                        DeleteHandler(val);
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <CategoryModal category={val} label='Edit' change={setIsChanged} loadedCategories={loadedCategories} />
+                    <DeleteModal
+                      val={val}
+                      change={setIsChanged}
+                      label="category"
+                    />
+                    <CategoryModal
+                      category={val}
+                      label="Edit"
+                      change={setIsChanged}
+                    />
                   </td>
                 </tr>
               );

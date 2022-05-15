@@ -22,13 +22,14 @@ function BookModal(props) {
       AuthorId,
       image,
     };
-    console.log(image)
-    if (props.label === "Add Book") {
+    console.log(image);
+    if (props.label === "Add") {
       fetch("http://localhost:5000/admin/books", {
         method: "POST",
         body: JSON.stringify(bookData),
         headers: {
           "Content-Type": "application/json",
+          token: sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -37,14 +38,18 @@ function BookModal(props) {
         .then((data) => {
           console.log(data);
         });
-    } else {
+    } else if (props.label === "Edit") {
+      if (bookData.image === "") {
+        delete bookData.image;
+      }
       fetch(
-        `http://localhost:5000/admin/books/${props.book._id}`,
+        `https://good-reads-server.herokuapp.com/admin/books/${props.book._id}`,
         {
           method: "PATCH",
           body: JSON.stringify(bookData),
           headers: {
             "Content-Type": "application/json",
+            token: sessionStorage.getItem("token"),
           },
         }
       )

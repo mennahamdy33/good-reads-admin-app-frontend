@@ -3,6 +3,7 @@ import "./Books.css";
 import Home from "./Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BookModal from '../../modal/BookModal'
+import {DeleteModal} from '../../modal/DeleteModal';
 function Books() {
 
   const [loadedbooks, setLoadedbooks] = useState([]);
@@ -30,20 +31,7 @@ function Books() {
       });
   }
 
-  function DeleteHandler(val) {
-    fetch(`https://good-reads-server.herokuapp.com/admins/books/${val._id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        console.log(json);
-        setIsChanged(true);
-
-      });
-  }
-
+  
   useEffect(() => {
     fetch("https://good-reads-server.herokuapp.com/admins/books")
       .then((response) => {
@@ -88,7 +76,7 @@ function Books() {
               return (
                 <tr key={key}>
                   <td>{key + 1}</td>
-                  <td>     <img className="activator" style={{ width: 50, height: 50 }} src={val.image} alt='cdcds' /></td>
+                  <td >     <img className="activator m-auto" style={{ width: '250px', height: '250px' }} src={val.image} alt='no pic' /> </td>
                   <td>{val.name}</td>
 
                   <td>{val.category[0] && val.category[0].name}</td>
@@ -97,14 +85,7 @@ function Books() {
                     {val.author[0] && val.author[0].firstName} {val.author[0] && val.author[0].lastName}
                   </td>
                   <td>
-                    <button
-                      className="xBtn"
-                      onClick={() => {
-                        DeleteHandler(val);
-                      }}
-                    >
-                      Delete
-                    </button>
+                    <DeleteModal val={val} change={setIsChanged} label="book"   />
                     <BookModal book={val} label='Edit' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
                   </td>
                 </tr>

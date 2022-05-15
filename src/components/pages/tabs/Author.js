@@ -1,48 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Books.css";
 import Home from "./Home";
+import { DeleteModal } from "../../modal/DeleteModal";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AuthorModal from '../../modal/AuthorModal'
+import AuthorModal from "../../modal/AuthorModal";
 function Authors() {
-
-//   const [loadedbooks, setLoadedbooks] = useState([]);
-//   const [loadedCategories, setLoadedCategories] = useState([]);
   const [loadedAuthors, setLoadedAuthors] = useState([]);
-
   const [isLoading, setIsLoading] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
-  function getAuthors() {
-    fetch("https://good-reads-server.herokuapp.com/admins/authors")
-      .then((response) => {
-        return response.json();
-      })
-      .then(async (data) => {
-        setLoadedAuthors(data);
-      });
-  }
-//   function getCategories() {
-//     fetch("https://good-reads-server.herokuapp.com/admins/categories")
-//       .then((response) => {
-//         return response.json();
-//       })
-//       .then(async (data) => {
-//         setLoadedCategories(data);
-//       });
-//   }
-
-  function DeleteHandler(val) {
-    fetch(`https://good-reads-server.herokuapp.com/admins/authors/${val._id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        console.log(json);
-        setIsChanged(true);
-
-      });
-  }
 
   useEffect(() => {
     fetch("https://good-reads-server.herokuapp.com/admins/authors")
@@ -55,8 +20,6 @@ function Authors() {
         setLoadedAuthors(data);
       });
     setIsChanged(false);
-    // getCategories();
-    getAuthors();
   }, [isChanged]);
 
   if (isLoading) {
@@ -67,13 +30,15 @@ function Authors() {
     );
   }
 
- 
-
- 
   return (
     <Home active="Authors">
       <div>
-        <AuthorModal author  label='Add' change={setIsChanged} loadedAuthors={loadedAuthors}/>
+        <AuthorModal
+          author
+          label="Add"
+          change={setIsChanged}
+          loadedAuthors={loadedAuthors}
+        />
 
         <div className="App">
           <table>
@@ -86,27 +51,39 @@ function Authors() {
               <th>Actions</th>
             </tr>
             {loadedAuthors.map((val, key) => {
+              const date = new Date(val.dateOfBirth);
               return (
                 <tr key={key}>
                   <td>{key + 1}</td>
-                  <td>{val.photo}</td>
+                  <td>
+                    {" "}
+                    <img
+                      className="activator m-auto"
+                      style={{ width: "250px", height: "250px" }}
+                      src={val.image}
+                      alt="without pic"
+                    />{" "}
+                  </td>
                   <td>{val.firstName}</td>
 
                   <td>{val.lastName}</td>
 
                   <td>
-                    {val.dateOfBirth}
+                    {`${date.getDate()}/${
+                      date.getMonth() + 1
+                    }/${date.getFullYear()}`}
                   </td>
                   <td>
-                    <button
-                      className="xBtn"
-                      onClick={() => {
-                        DeleteHandler(val);
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <AuthorModal author={val} label='Edit' change={setIsChanged} loadedAuthors={loadedAuthors}/>
+                    <DeleteModal
+                      val={val}
+                      change={setIsChanged}
+                      label="author"
+                    />
+                    <AuthorModal
+                      author={val}
+                      label="Edit"
+                      change={setIsChanged}
+                    />
                   </td>
                 </tr>
               );

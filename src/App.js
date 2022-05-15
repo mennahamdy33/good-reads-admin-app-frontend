@@ -29,7 +29,7 @@ function App() {
   }
   if (isLoggedin) {
     return (
-      <Home />
+      <Home  />
     )
     ;
   }
