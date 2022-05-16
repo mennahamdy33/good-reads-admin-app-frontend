@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Books.css";
 import Home from "./Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BookModal from '../../modal/BookModal'
 import {DeleteModal} from '../../modal/DeleteModal';
+import PaginationBasic from '../../layout/Pagination/Pagination'
 function Books() {
 
   const [loadedbooks, setLoadedbooks] = useState([]);
   const [loadedCategories, setLoadedCategories] = useState([]);
   const [loadedAuthors, setLoadedAuthors] = useState([]);
+ const [activted, setActivated] = useState(1);
 
+//  const [noOfPages, setNoOfPages] = useState(1);
+  const noOfPages=useRef();
   const [isLoading, setIsLoading] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
   function getAuthors() {
@@ -33,18 +37,22 @@ function Books() {
 
   
   useEffect(() => {
-    fetch("https://good-reads-server.herokuapp.com/admins/books")
+    fetch(`http://localhost:5000/admins/books?page=${activted}`)
       .then((response) => {
         return response.json();
       })
       .then(async (data) => {
         setIsLoading(false);
-        setLoadedbooks(data);
+        setLoadedbooks(data.data);
+        // setNoOfPages(data.pages)
+        noOfPages.value = data.pages;
+        console.log(data.pages)
       });
+      
     setIsChanged(false);
     getCategories();
     getAuthors();
-  }, [isChanged]);
+  }, [isChanged,activted]);
 
   if (isLoading) {
     return (
@@ -58,6 +66,7 @@ function Books() {
 
  
   return (
+    <>
     <Home active="Books">
       <div>
         <BookModal book  label='Add' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
@@ -91,10 +100,14 @@ function Books() {
                 </tr>
               );
             })}
+            <tr  >  <td colspan="6"  >  <PaginationBasic activated={setActivated} pages={noOfPages}  /> </td></ tr>
           </table>
         </div>
       </div>
+      
     </Home>
+  
+    </>
   );
 }
 export default Books;
