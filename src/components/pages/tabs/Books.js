@@ -37,7 +37,7 @@ function Books() {
 
   
   useEffect(() => {
-    fetch(`http://localhost:5000/admins/books?page=${activted}`)
+    fetch(`https://good-reads-server.herokuapp.com/admins/books?page=${activted}`)
       .then((response) => {
         return response.json();
       })

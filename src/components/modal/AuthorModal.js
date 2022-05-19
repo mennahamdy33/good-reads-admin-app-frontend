@@ -25,7 +25,7 @@ function AuthorModal(props) {
       image,
     };
     if (props.label === "Add") {
-      fetch("http://localhost:5000/admin/authors", {
+      fetch("https://good-reads-server.herokuapp.com/admin/authors", {
         method: "POST",
         body: JSON.stringify(authorData),
         headers: {
@@ -44,7 +44,7 @@ function AuthorModal(props) {
         delete authorData.image;
       }
 
-      fetch(`http://localhost:5000/admin/authors/${props.author._id}`, {
+      fetch(`https://good-reads-server.herokuapp.com/admin/authors/${props.author._id}`, {
         method: "PATCH",
         body: JSON.stringify(authorData),
         headers: {

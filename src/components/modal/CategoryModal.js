@@ -16,7 +16,7 @@ function CategoryModal(props) {
       name,
     };
     if (props.label === "Add") {
-      fetch("http://localhost:5000/admin/categories", {
+      fetch("https://good-reads-server.herokuapp.com/admin/categories", {
         method: "POST",
         body: JSON.stringify(CategoryData),
         headers: {

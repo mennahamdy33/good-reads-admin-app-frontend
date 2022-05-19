@@ -24,7 +24,7 @@ function BookModal(props) {
     };
     console.log(image);
     if (props.label === "Add") {
-      fetch("http://localhost:5000/admin/books", {
+      fetch("https://good-reads-server.herokuapp.com/admin/books", {
         method: "POST",
         body: JSON.stringify(bookData),
         headers: {
