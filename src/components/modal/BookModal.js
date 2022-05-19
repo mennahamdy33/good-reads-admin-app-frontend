@@ -22,7 +22,9 @@ function BookModal(props) {
       AuthorId,
       image,
     };
-    console.log(image);
+    // console.log(image);
+    console.log(CategoryId);
+
     if (props.label === "Add") {
       fetch("https://good-reads-server.herokuapp.com/admin/books", {
         method: "POST",

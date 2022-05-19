@@ -17,7 +17,7 @@ function Authors() {
       .then(async (data) => {
         setIsLoading(false);
         // setLoadedbooks(data);
-        setLoadedAuthors(data);
+        setLoadedAuthors(data.authors);
       });
     setIsChanged(false);
   }, [isChanged]);
@@ -60,7 +60,7 @@ function Authors() {
                     <img
                       className="activator m-auto"
                       style={{ width: "250px", height: "250px" }}
-                      src={val.image}
+                      src={val.image?val.image:"https://lovelace-media.imgix.net/uploads/477/f7387590-a361-0133-6e11-0e87cd6e10c7.gif?w=740&h=429&fit=max&auto=format"}
                       alt="without pic"
                     />{" "}
                   </td>

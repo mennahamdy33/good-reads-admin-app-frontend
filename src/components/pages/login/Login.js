@@ -4,7 +4,7 @@ import Card from "../../ui/Card";
 function Login(props) {
     const usernameInputRef = useRef();
     const passwordInputRef = useRef();
- 
+ console.log(props.wrong)
     function submitHandler(event){
         event.preventDefault();
         const username = usernameInputRef.current.value;

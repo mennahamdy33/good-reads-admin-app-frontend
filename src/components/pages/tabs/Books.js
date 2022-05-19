@@ -22,7 +22,7 @@ function Books() {
         return response.json();
       })
       .then(async (data) => {
-        setLoadedAuthors(data);
+        setLoadedAuthors(data.authors);
       });
   }
   function getCategories() {
@@ -85,7 +85,7 @@ function Books() {
               return (
                 <tr key={key}>
                   <td>{key + 1}</td>
-                  <td >     <img className="activator m-auto" style={{ width: '250px', height: '250px' }} src={val.image} alt='no pic' /> </td>
+                  <td >     <img className="activator m-auto" style={{ width: '250px', height: '250px' }} src={val.image?val.image: "https://i.pinimg.com/originals/b4/3d/43/b43d438638e2ed51d1f19dad2a4eb24d.gif"} alt='no pic' /> </td>
                   <td>{val.name}</td>
 
                   <td>{val.category[0] && val.category[0].name}</td>
@@ -100,7 +100,10 @@ function Books() {
                 </tr>
               );
             })}
-            <tr  >  <td colspan="6"  >  <PaginationBasic activated={setActivated} pages={noOfPages}  /> </td></ tr>
+           
+           
+           <tr><td colspan="6"> <PaginationBasic activated={setActivated} pages={noOfPages} /> </td></ tr>
+           
           </table>
         </div>
       </div>

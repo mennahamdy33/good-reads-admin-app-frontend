@@ -16,7 +16,7 @@ for (let number = 1; number <= props.pages.value; number++) {
     </Pagination.Item>,
   );
 }
-
+if(props.pages.value!=1)
 return (
   <div  >
    
