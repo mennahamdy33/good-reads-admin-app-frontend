@@ -38,10 +38,7 @@ const Footer = () => {
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             
               <h6 className="text-uppercase font-weight-bold">
-              <a className="li-ic">
-                <i className="fab fa-linkedin-in white-text mr-4"> </i>
-              </a>
-              <h5></h5> Our LinkdIn</h6>
+               Our LinkdIn</h6>
               <hr
                 className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
                 style={{ width: "60px" }}
@@ -75,10 +72,7 @@ const Footer = () => {
 
             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase font-weight-bold">
-              {/* <a className="gi-ic"> */}
-                <i className="fab fa-github white-text mr-4" color=""> </i>
-              {/* </a> */}
-               <h5></h5>  Our Github</h6>
+                Our Github</h6>
               <hr
                 className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
                 style={{ width: " 60px" }}
