@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BookModal from '../../modal/BookModal'
 import {DeleteModal} from '../../modal/DeleteModal';
 import PaginationBasic from '../../layout/Pagination/Pagination'
+
 function Books() {
 
   const [loadedbooks, setLoadedbooks] = useState([]);
@@ -68,7 +69,7 @@ function Books() {
   return (
     <>
     <Home active="Books">
-      <div>
+      <div style={{overflow:"auto"}}>
         <BookModal book  label='Add' change={setIsChanged} loadedAuthors={loadedAuthors} loadedCategories={loadedCategories} />
 
         <div className="App">
@@ -85,7 +86,7 @@ function Books() {
               return (
                 <tr key={key}>
                   <td>{key + 1}</td>
-                  <td >     <img className="activator m-auto" style={{ width: '250px', height: '250px' }} src={val.image?val.image: "https://i.pinimg.com/originals/b4/3d/43/b43d438638e2ed51d1f19dad2a4eb24d.gif"} alt='no pic' /> </td>
+                  <td >     <img className="activator m-auto" style={{ width: '200px', height: '200px' }} src={val.image?val.image: "https://i.pinimg.com/originals/b4/3d/43/b43d438638e2ed51d1f19dad2a4eb24d.gif"} alt='no pic' /> </td>
                   <td>{val.name}</td>
 
                   <td>{val.category[0] && val.category[0].name}</td>
@@ -107,7 +108,6 @@ function Books() {
           </table>
         </div>
       </div>
-      
     </Home>
   
     </>

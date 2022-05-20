@@ -4,6 +4,7 @@ import Home from "./Home";
 import { DeleteModal } from "../../modal/DeleteModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthorModal from "../../modal/AuthorModal";
+
 function Authors() {
   const [loadedAuthors, setLoadedAuthors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +33,7 @@ function Authors() {
 
   return (
     <Home active="Authors">
-      <div>
+      <div style={{overflow:"auto"}}>
         <AuthorModal
           author
           label="Add"
@@ -59,7 +60,7 @@ function Authors() {
                     {" "}
                     <img
                       className="activator m-auto"
-                      style={{ width: "250px", height: "250px" }}
+                      style={{ width: "200px", height: "200px" }}
                       src={val.image?val.image:"https://lovelace-media.imgix.net/uploads/477/f7387590-a361-0133-6e11-0e87cd6e10c7.gif?w=740&h=429&fit=max&auto=format"}
                       alt="without pic"
                     />{" "}

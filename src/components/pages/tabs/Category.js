@@ -4,6 +4,7 @@ import Home from "./Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CategoryModal from "../../modal/CategoryModal";
 import { DeleteModal } from "../../modal/DeleteModal";
+
 function Category() {
   // const [loadedbooks, setLoadedbooks] = useState([]);
   const [loadedCategories, setLoadedCategories] = useState([]);
@@ -35,7 +36,7 @@ function Category() {
 
   return (
     <Home active="Category">
-      <div>
+      <div style={{overflow:"auto"}}>
         <div className="btnAddCategory">
           <CategoryModal
             category

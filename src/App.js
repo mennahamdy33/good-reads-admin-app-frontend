@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "@material-tailwind/react/tailwind.css";
 import Login from "./components/pages/login/Login";
 import Book from "./components/pages/tabs/Books";
+import Footer from "./components/footer/footer";
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   
@@ -34,7 +35,10 @@ function App() {
   }
   if (isLoggedin) {
     return (
+      <>
       <Book  />
+      <Footer/>
+      </>
     )
     ;
   }
